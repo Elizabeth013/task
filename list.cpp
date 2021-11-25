@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-
+//1.Самостоятельно реализуйте структуру и функционал односвязного списка
 struct Node {
 	int val;
 	Node* next;
@@ -11,11 +11,11 @@ struct list {
 	Node* first;
 	Node* last;
 	list() : first (nullptr), last (nullptr) {}
-
+//Проверка на пустоту
 bool empty () {
 	return first == nullptr;
 }
-
+//Нахождение определенного элемента
 Node* find (int _val) {
 	Node* ptr = first;
 	while(ptr!=nullptr) {
@@ -25,7 +25,7 @@ Node* find (int _val) {
 	}
 	return ptr;
 }
-
+//Добавление
 void push_back (int _val) {
 	Node* ptr = new Node( _val);
 	if ( empty() ) {
@@ -37,7 +37,7 @@ void push_back (int _val) {
 	last=ptr;
 	}
 }
-
+//Вывод
 void print() {
 	if (empty()) return;
 	Node* ptr = first;
@@ -47,7 +47,7 @@ void print() {
 	}
 	cout<<endl;
 }
-
+//Удалить последний
 void remove_last() {
 	if (empty()) return;
 	if (first == last) {
@@ -60,14 +60,14 @@ void remove_last() {
 	delete last;
 	last= ptr;
 }
-
+//Удалить первый
 void remove_first() {
 	if (empty()) return;
 	Node* ptr=first;
 	first=ptr->next;
 	delete ptr;
 }
-
+//Удалить определенный
 void remove_val (int _val) {
 	if (empty()) return;
 	if (first->val == _val) {
@@ -105,7 +105,7 @@ Node *operator [] (const int index) {
 	}
 	return ptr;
 }
-
+//2.Напишите функцию,которая позволяет изменить все элементы списка следующим образом: если data-четной,то (x/2),если нечетное,то (x*3-1).
 void change()
 {
     Node *ptr=first;
@@ -116,14 +116,14 @@ void change()
         
     }
 }
-
+//Добавление в начало
 void push_front(int _val)
 {
    	Node* ptr = new Node( _val);
     ptr->next=first;
     first=ptr;
 }
-
+//Счетчик
 int count()
 {
     int k=0;
@@ -137,7 +137,7 @@ int count()
     return k;
 }
 };
-
+//3. Напишите функцию по изменению порядка элементов в односвязном списке на обратный
 void revers(list &l)
 {
     list l1;
@@ -149,20 +149,20 @@ void revers(list &l)
     // l1.print();
     l=l1;
 }
-
+//4.Напишите функцию,котораяпроверяет, можно ли удалить из спискакаких-нибудь два элемента так, чтобы новый список оказался упорядоченным.
 int f(list l)
 {
    int k=2;
     for(int i=1;i<l.count()-1; i++)
     {
-        if(l[i-1]<=l[i]&& l[i]<=l[i+1]) k++;
+        if(l[i-1]<=l[i] && l[i]<=l[i+1]) k++;
        
     }
    if(k==l.count()) return 0;
    else if(k==l.count()-2) return 1;
    else return -1;
 }
-
+//Главная часть-проверки
 int main() {
 	list l;
 	cout<<l.empty()<<endl;
@@ -207,12 +207,12 @@ int main() {
 	l.remove_first();
 	l.remove_first();
 	l.print();
-	 up=f(l);
+	up=f(l);
 	switch(up)
 	{
-	    case 0: cout<<"up"<<endl;break;
-	    case 1: cout<<"+"<<endl;break;
-	    case -1: cout<<"-"<<endl;break;
+	    case 0: cout<<"up"<<endl;break; //упорядоченный
+	    case 1: cout<<"+"<<endl;break; //можно упорядочить
+	    case -1: cout<<"-"<<endl;break; //нельзя упорядочить
 	};
 	return 0;  
 }
