@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-
+//7.Дополните реализованную структуру односвязного списка до двусвязного.
 struct Node {
 	int val;
 	Node* next;
@@ -12,11 +12,11 @@ struct list {
 	Node* first;
 	Node* last;
 	list() : first (nullptr), last (nullptr) {}
-
+//Проверка на пустоту
 bool empty () {
 	return first == nullptr;
 }
-
+//Нахождение определенного элемента
 Node* find (int _val) {
 	Node* ptr = first;
 	while(ptr!=nullptr)	{
@@ -26,7 +26,7 @@ Node* find (int _val) {
 	}
 	return ptr;
 }
-
+//Добавление элемента
 void push_back (int _val) {
 	Node* ptr = new Node( _val);
 	if ( empty() ) {
@@ -39,7 +39,7 @@ void push_back (int _val) {
 	last=ptr;
 	}
 }
-
+//Вывод
 void print() {
 	if (empty()) return;
 	Node* ptr = first;
@@ -49,7 +49,7 @@ void print() {
 	}
 	cout<<endl;
 }
-
+//Удалить последний
 void remove_last() { 
 	if (empty()) return;
 	if (first == last) {
@@ -62,7 +62,7 @@ void remove_last() {
 	delete last;
 	last= ptr;
 }
-
+//Удалить первый
 void remove_first() {
 	if (empty()) return;
 	Node* ptr=first;
@@ -70,7 +70,7 @@ void remove_first() {
 	first->prew=nullptr;
 	delete ptr;
 }
-
+//Удалить определенный
 void remove_val (int _val) {
 	if (empty()) return;
 	if (first->val == _val) {
@@ -105,14 +105,14 @@ Node *operator [] (const int index) {
 	}
 	return ptr;
 }
-
+//Добавить в начало
 void push_front(int _val) {
    	Node* ptr = new Node( _val);
     ptr->next=first;
     first->prew=ptr;
     first=ptr;
 }
-
+//Счетчик
 int count() {
     int k=0;
     Node *ptr=first;
@@ -123,7 +123,8 @@ int count() {
     return k;
 }
 };
-
+//8. Определение является ли двусвязный список симметричным
+//Для нечетного
 bool IsSim1(list l) {
     bool p=true;
     Node *p1=l.first;
@@ -135,7 +136,7 @@ bool IsSim1(list l) {
     } 
     return p;
 }
-
+//Для четного
 bool IsSim0(list l) {
     bool p=true;
     Node *p1=l.first;
@@ -148,13 +149,13 @@ bool IsSim0(list l) {
     }
     return p;
 }
-
+//Основная
 bool IsSim(list l) {
     if (l.empty()) return false;
     if(l.count()%2==0) return IsSim0(l);
-    else return IsSim0(l);
+    else return IsSim1(l);
 }
-
+//Главная часть-проверки
 int main() {
 	list l;
 	cout<<l.empty()<<endl;
@@ -180,10 +181,9 @@ int main() {
 	l.print();
 	if(l.find(7)!=nullptr) cout<<"+"; else cout<<"-"<<endl;
 	if(l.find(14)!=nullptr) cout<<"+"; else cout<<"-"<<endl;
-
 	l.push_front(13);
 	l.print();
-    cout<<IsSim(l)<<endl;
+   	cout<<IsSim(l)<<endl;
     
 	return 0;  
 }
